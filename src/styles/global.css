@@ -72,6 +72,7 @@ body {
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
@@ -126,6 +127,8 @@ code, kbd, samp, pre { font-family: var(--font-mono); font-size: 0.95em; }
 }
 
 .trace { color: var(--trace); }
+
+.is-hidden { display: none !important; }
 
 .rule { border: 0; border-top: var(--hairline); margin: var(--space-7) 0; }
 

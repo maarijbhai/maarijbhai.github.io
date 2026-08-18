@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.svg';
+---
+
+<Base title="About — Maarij Alam">
+  <h1>About</h1>
+
+  <div class="about">
+    <div class="about__portrait">
+      <Image src={portrait} alt="TODO: alt text describing the portrait" widths={[400, 600, 800]} sizes="(max-width: 640px) 60vw, 240px" />
+    </div>
+
+    <div class="about__prose">
+      <p>TODO: opening paragraph — who I am, what I'm studying, where I'm from and where I'm heading.</p>
+
+      <p>TODO: the path into engineering — how I got here, what drew me toward embedded systems and RF, and where the pull toward software is coming from.</p>
+
+      <p>TODO: the AQUA Project internship — what it is, what I built, what I took away.</p>
+
+      <p>TODO: tutoring EEE3088F — what I teach, what I've learned from teaching it.</p>
+
+      <p>TODO: closing paragraph — how I think about engineering work, and what I'm looking for after I graduate in 2026.</p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: start;
+    margin-top: var(--space-6);
+  }
+  .about__portrait :global(img),
+  .about__portrait :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+  .about__prose { max-width: 60ch; }
+  .about__prose p { margin-bottom: var(--space-4); }
+
+  @media (max-width: 640px) {
+    .about { grid-template-columns: 1fr; gap: var(--space-6); }
+    .about__portrait { max-width: 240px; }
+  }
+</style>

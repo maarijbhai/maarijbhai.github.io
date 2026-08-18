@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const filters = [
+  { label: 'ALL',      value: 'all' },
+  { label: 'HARDWARE', value: 'hardware' },
+  { label: 'EMBEDDED', value: 'embedded' },
+  { label: 'SOFTWARE', value: 'software' },
+  { label: 'ML',       value: 'ml' },
+  { label: 'RF',       value: 'rf' },
+];
+---
+
+<Base title="Projects — Maarij Alam">
+  <h1>Projects</h1>
+
+  <div class="chips" role="group" aria-label="Filter projects by domain">
+    {filters.map((f, i) => (
+      <button
+        type="button"
+        class:list={['chip', 'mono', i === 0 && 'chip--active']}
+        data-filter={f.value}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+      >{f.label}</button>
+    ))}
+  </div>
+
+  <div class="grid">
+    {projects.map((p) => <ProjectCard project={p} />)}
+  </div>
+</Base>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-5) 0 var(--space-7);
+  }
+  .chip {
+    background: transparent;
+    border: 0.5px solid var(--rule);
+    border-radius: 2px;
+    padding: var(--space-2) var(--space-4);
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 120ms linear, border-color 120ms linear;
+  }
+  .chip:hover { color: var(--ink); border-color: var(--ink); }
+  .chip--active,
+  .chip--active:hover {
+    color: var(--signal);
+    border-color: var(--signal);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-7) var(--space-6);
+  }
+  @media (max-width: 899px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 599px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
+  const cards = document.querySelectorAll<HTMLElement>('.card[data-domain]');
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => {
+        c.classList.remove('chip--active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      chip.classList.add('chip--active');
+      chip.setAttribute('aria-pressed', 'true');
+
+      const filter = chip.dataset.filter ?? 'all';
+      cards.forEach((card) => {
+        const domain = card.dataset.domain;
+        if (filter === 'all' || domain === filter) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+</script>

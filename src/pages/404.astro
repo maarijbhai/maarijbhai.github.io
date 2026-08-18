@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found — Maarij Alam">
+  <div class="not-found">
+    <p class="mono not-found__code">ERROR 404</p>
+    <h1>Page not found</h1>
+    <p>That page doesn't exist. Try the <a href="/">home page</a> or the <a href="/projects/">projects list</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .not-found {
+    max-width: 60ch;
+    padding: var(--space-8) 0;
+  }
+  .not-found__code { margin: 0 0 var(--space-3); }
+</style>

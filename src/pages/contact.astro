@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+
+const email = 'maarij.alam@outlook.com';
+const github = 'https://github.com/maarijbhai';
+// TODO: LinkedIn URL
+---
+
+<Base title="Contact — Maarij Alam">
+  <h1>Contact</h1>
+
+  <p class="contact__intro">
+    The fastest way to reach me is email. I read every message.
+  </p>
+
+  <dl class="contact">
+    <div class="contact__row">
+      <dt class="mono">EMAIL</dt>
+      <dd><a href={`mailto:${email}`}>{email}</a></dd>
+    </div>
+
+    <div class="contact__row">
+      <dt class="mono">GITHUB</dt>
+      <dd><a href={github}>{github.replace(/^https?:\/\//, '')}</a></dd>
+    </div>
+
+    <div class="contact__row">
+      <dt class="mono">LINKEDIN</dt>
+      <dd>TODO: LinkedIn URL</dd>
+    </div>
+  </dl>
+</Base>
+
+<style>
+  .contact__intro {
+    max-width: 52ch;
+    color: var(--muted);
+    margin: 0 0 var(--space-6);
+  }
+  .contact {
+    max-width: 60ch;
+    margin: 0;
+    border-top: 0.5px solid var(--rule);
+  }
+  .contact__row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-5);
+    padding: var(--space-3) 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .contact__row dt { flex: 0 0 96px; margin: 0; }
+  .contact__row dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+</style>
