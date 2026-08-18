@@ -1,0 +1,32 @@
+---
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const links = [
+  { href: '/',          label: 'Home' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/about/',    label: 'About' },
+  { href: '/cv/',       label: 'CV' },
+  { href: '/contact/',  label: 'Contact' },
+];
+
+function isCurrent(href: string): boolean {
+  const target = href.replace(/\/+$/, '') || '/';
+  if (target === '/') return pathname === '/';
+  return pathname === target || pathname.startsWith(target + '/');
+}
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/">Maarij</a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        {links.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

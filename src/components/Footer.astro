@@ -1,0 +1,24 @@
+---
+const links = [
+  { href: '/',          label: 'Home' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/about/',    label: 'About' },
+  { href: '/cv/',       label: 'CV' },
+  { href: '/contact/',  label: 'Contact' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <nav aria-label="Footer">
+      <ul>
+        {links.map(({ href, label }) => (
+          <li><a href={href}>{label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <p class="site-footer__meta">© {year} Maarij · Cape Town</p>
+  </div>
+</footer>
