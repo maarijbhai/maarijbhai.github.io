@@ -1,43 +1,52 @@
 // scripts/make-placeholders.mjs
-// Generates flat PNG placeholders in the design palette.
-// Run:  node scripts/make-placeholders.mjs
+// Emits flat-colour SVG placeholders — no runtime dependencies.
+// Run:  npm run placeholders
 
-import sharp from 'sharp';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const outDir = resolve(__dirname, '..', 'src', 'assets', 'placeholders');
+const assetsDir       = resolve(__dirname, '..', 'src', 'assets');
+const placeholdersDir = resolve(assetsDir, 'placeholders');
 
-const RULE  = '#C9CFD6';
-const MUTED = '#5C6672';
-const PAPER = '#FBFBF9';
+const BG    = '#C9CFD6';
+const LABEL = '#5C6672';
 
-function svg(w, h, label) {
-  const inset = Math.round(Math.min(w, h) * 0.04);
+function svg(w, h) {
+  const label    = `${w} × ${h}`;
   const fontSize = Math.round(Math.min(w, h) * 0.045);
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <rect width="${w}" height="${h}" fill="${RULE}"/>
-  <rect x="${inset}" y="${inset}" width="${w - inset * 2}" height="${h - inset * 2}"
-        fill="none" stroke="${PAPER}" stroke-width="1"/>
-  <text x="${w / 2}" y="${h / 2}"
-        font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace"
+  const tracking = (fontSize * 0.08).toFixed(2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Placeholder ${label}">
+  <rect width="100%" height="100%" fill="${BG}"/>
+  <text x="50%" y="50%"
+        font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace"
         font-size="${fontSize}"
-        letter-spacing="${fontSize * 0.14}"
+        font-weight="500"
+        letter-spacing="${tracking}"
         text-anchor="middle"
         dominant-baseline="middle"
-        fill="${MUTED}">${label}</text>
-</svg>`;
+        fill="${LABEL}">${label}</text>
+</svg>
+`;
 }
 
-async function makePlaceholder(name, w, h, label) {
-  const buf = Buffer.from(svg(w, h, label));
-  const out = resolve(outDir, name);
-  await sharp(buf).png({ compressionLevel: 9 }).toFile(out);
-  console.log(`wrote ${out}`);
+async function write(path, contents) {
+  await writeFile(path, contents, 'utf8');
+  console.log(`wrote ${path}`);
 }
 
-await mkdir(outDir, { recursive: true });
-await makePlaceholder('hero-16x9.png',  1600, 900, 'PLACEHOLDER · 1600 × 900');
-await makePlaceholder('figure-4x3.png', 1200, 900, 'PLACEHOLDER · 1200 × 900');
+// Wipe stale artefacts from the previous sharp-based version.
+for (const stale of [
+  resolve(placeholdersDir, 'hero-16x9.png'),
+  resolve(placeholdersDir, 'figure-4x3.png'),
+  resolve(assetsDir, 'portrait.png'),
+]) {
+  await rm(stale, { force: true });
+}
+
+await mkdir(placeholdersDir, { recursive: true });
+
+await write(resolve(placeholdersDir, 'hero-16x9.svg'),  svg(1600, 900));
+await write(resolve(placeholdersDir, 'figure-4x3.svg'), svg(1200, 900));
+await write(resolve(assetsDir,       'portrait.svg'),   svg(800, 1000));
