@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  prev: CollectionEntry<'projects'> | null;
+  next: CollectionEntry<'projects'> | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="prev-next" aria-label="Project navigation">
+  <div class="prev-next__slot prev-next__slot--prev">
+    {prev && (
+      <a class="mono prev-next__link" href={`/projects/${prev.id}/`}>
+        ← {prev.data.title}
+      </a>
+    )}
+  </div>
+  <div class="prev-next__slot prev-next__slot--next">
+    {next && (
+      <a class="mono prev-next__link" href={`/projects/${next.id}/`}>
+        {next.data.title} →
+      </a>
+    )}
+  </div>
+</nav>
+
+<style>
+  .prev-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: 0.5px solid var(--rule);
+  }
+  .prev-next__slot { min-width: 0; }
+  .prev-next__slot--next { text-align: right; margin-left: auto; }
+
+  .prev-next a.prev-next__link {
+    color: var(--signal);
+    text-decoration: none;
+  }
+  .prev-next a.prev-next__link:hover {
+    color: var(--ink);
+  }
+</style>

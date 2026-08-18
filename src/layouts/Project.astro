@@ -1,0 +1,72 @@
+---
+import Base from './Base.astro';
+import SpecBlock from '../components/SpecBlock.astro';
+import Figure from '../components/Figure.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import PrevNext from '../components/PrevNext.astro';
+
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  prev: CollectionEntry<'projects'> | null;
+  next: CollectionEntry<'projects'> | null;
+}
+
+const { project, prev, next } = Astro.props;
+const {
+  title,
+  blurb,
+  role,
+  period,
+  stack,
+  keyResult,
+  hero,
+  heroAlt,
+  youtubeId,
+} = project.data;
+---
+
+<Base title={`${title} — Maarij Alam`} description={blurb}>
+  <a href="/projects/" class="back-link mono">← All projects</a>
+
+  <h1>{title}</h1>
+
+  <SpecBlock role={role} period={period} stack={stack} keyResult={keyResult} />
+
+  <Figure src={hero} alt={heroAlt} />
+
+  <div class="project-body">
+    <slot />
+  </div>
+
+  <VideoEmbed youtubeId={youtubeId} />
+
+  <PrevNext prev={prev} next={next} />
+</Base>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-5);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  .project-body {
+    max-width: 60ch;
+    margin-top: var(--space-6);
+  }
+  .project-body :global(h2) {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: var(--space-7) 0 var(--space-3);
+  }
+  .project-body :global(h2:first-child) { margin-top: 0; }
+  .project-body :global(p) { margin-bottom: var(--space-4); }
+</style>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  role: string;
+  period: string;
+  stack: string[];
+  keyResult: string;
+}
+
+const { role, period, stack, keyResult } = Astro.props;
+
+const rows = [
+  { label: 'ROLE',       value: role },
+  { label: 'PERIOD',     value: period },
+  { label: 'STACK',      value: stack.join(' · ') },
+  { label: 'KEY RESULT', value: keyResult, keyResult: true },
+];
+---
+
+<dl class="spec-block">
+  {rows.map(({ label, value, keyResult: kr }) => (
+    <div class="spec-block__row">
+      <dt class="spec-block__label mono">{label}</dt>
+      <dd class:list={['spec-block__value', kr && 'spec-block__value--key']}>{value}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .spec-block {
+    margin: 0 0 var(--space-6);
+    border-top: 0.5px solid var(--rule);
+  }
+  .spec-block__row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-5);
+    padding: var(--space-3) 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .spec-block__label {
+    flex: 0 0 132px;
+    margin: 0;
+  }
+  .spec-block__value {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ink);
+    word-break: break-word;
+  }
+  .spec-block__value--key { color: var(--trace); }
+
+  @media (max-width: 559px) {
+    .spec-block__row {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .spec-block__label { flex: none; }
+  }
+</style>
