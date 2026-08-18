@@ -1,8 +1,4 @@
 ---
-import '@fontsource-variable/archivo';
-import '@fontsource-variable/source-serif-4';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
 
 import Nav from '../components/Nav.astro';
@@ -31,6 +27,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Maarij Alam" />
