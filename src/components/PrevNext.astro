@@ -29,15 +29,21 @@ const { prev, next } = Astro.props;
 <style>
   .prev-next {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: var(--space-4);
+    gap: var(--space-3) var(--space-4);
     margin-top: var(--space-8);
     padding-top: var(--space-5);
     border-top: 0.5px solid var(--rule);
   }
   .prev-next__slot { min-width: 0; }
   .prev-next__slot--next { text-align: right; margin-left: auto; }
+  .prev-next__link { overflow-wrap: anywhere; }
+
+  @media (max-width: 480px) {
+    .prev-next__slot--next { text-align: left; margin-left: 0; }
+  }
 
   .prev-next a.prev-next__link {
     color: var(--signal);

@@ -1,26 +1,38 @@
 ---
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import Base from '../layouts/Base.astro';
 
 const cvHref = '/cv/maarij-cv.pdf';
+const cvFsPath = fileURLToPath(new URL('../../public/cv/maarij-cv.pdf', import.meta.url));
+const cvPresent = existsSync(cvFsPath);
 ---
 
 <Base title="CV — Maarij Alam">
   <div class="cv__header">
     <h1>CV</h1>
-    <a class="cv__download mono" href={cvHref} download>Download PDF</a>
+    {cvPresent && (
+      <a class="cv__download mono" href={cvHref} download>Download PDF</a>
+    )}
   </div>
 
-  <object
-    class="cv__pdf"
-    data={cvHref}
-    type="application/pdf"
-    aria-label="Maarij Alam CV — PDF preview"
-  >
-    <p class="cv__fallback">
-      Your browser can't preview PDFs inline.
-      <a href={cvHref} download>Download the CV (PDF)</a>.
-    </p>
-  </object>
+  {cvPresent ? (
+    <object
+      class="cv__pdf"
+      data={cvHref}
+      type="application/pdf"
+      aria-label="Maarij Alam CV — PDF preview"
+    >
+      <p class="cv__fallback">
+        Your browser can't preview PDFs inline.
+        <a href={cvHref} download>Download the CV (PDF)</a>.
+      </p>
+    </object>
+  ) : (
+    <div class="cv__placeholder">
+      <span class="mono">CV PDF — TO BE ADDED</span>
+    </div>
+  )}
 </Base>
 
 <style>
@@ -57,5 +69,15 @@ const cvHref = '/cv/maarij-cv.pdf';
     padding: var(--space-6);
     text-align: center;
     margin: 0;
+  }
+  .cv__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) var(--space-6);
+    border: 0.5px solid var(--rule);
+    border-radius: 2px;
+    min-height: 12rem;
+    text-align: center;
   }
 </style>
