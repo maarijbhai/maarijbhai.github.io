@@ -7,12 +7,14 @@
 
 :root {
   /* Colour */
-  --paper:  #FBFBF9;
-  --ink:    #14181D;
-  --muted:  #5C6672;
-  --rule:   #C9CFD6;
-  --signal: #1B4DB1;
-  --trace:  #E8A33D;
+  --paper:      #FBFBF9;
+  --ink:        #14181D;
+  --ink-dark:   #0B0E12;
+  --muted:      #5C6672;
+  --muted-dark: #9AA4B0;
+  --rule:       #C9CFD6;
+  --signal:     #1B4DB1;
+  --trace:      #E8A33D;
 
   /* Type stacks */
   --font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -147,7 +149,7 @@ code, kbd, samp, pre { font-family: var(--font-mono); font-size: 0.95em; }
   left: var(--space-4);
   top: var(--space-4);
   padding: var(--space-2) var(--space-4);
-  background: var(--ink);
+  background: var(--signal);
   color: var(--paper);
   font-family: var(--font-body);
   font-weight: 500;
@@ -158,6 +160,7 @@ code, kbd, samp, pre { font-family: var(--font-mono); font-size: 0.95em; }
   border-radius: 2px;
   transform: translateY(-200%);
   z-index: 100;
+  box-shadow: 0 0 0 2px var(--paper);
 }
 .skip-link:focus { transform: translateY(0); color: var(--paper); }
 
@@ -169,6 +172,18 @@ main {
   max-width: var(--page-max);
   margin: 0 auto;
   padding: var(--space-7) var(--page-pad) var(--space-8);
+}
+
+/* Available utility for pages that opt out of main's width constraint.
+   Kept as a class so page-level content can set its own container without
+   forcing every existing page to migrate at once. */
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-pad);
+  padding-right: var(--page-pad);
 }
 
 /* ---------- Header / nav ---------- */
@@ -227,6 +242,32 @@ main {
 @media (max-width: 640px) {
   .site-header__inner { flex-direction: column; align-items: flex-start; }
   .site-nav { width: 100%; }
+}
+
+/* Dark-variant nav — used when the page below opens with a dark hero.
+   Positions the header absolutely so the hero sits under it. */
+.site-header--dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: transparent;
+  border-bottom: 0;
+}
+.site-header--dark .wordmark { color: var(--paper); }
+.site-header--dark .wordmark:hover { color: var(--trace); }
+.site-header--dark .site-nav a { color: var(--muted-dark); }
+.site-header--dark .site-nav a:hover {
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+}
+.site-header--dark .site-nav a[aria-current="page"] {
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+}
+.site-header--dark .site-nav li:not(:last-child)::after {
+  color: var(--muted-dark);
 }
 
 /* ---------- Footer ---------- */

@@ -23,8 +23,14 @@ const {
   keyResult,
   hero,
   heroAlt,
+  heroFocus,
   youtubeId,
+  videoLoop,
+  videoAlt,
+  videoAsHero,
 } = project.data;
+
+const videoInHero = videoAsHero && !!videoLoop;
 ---
 
 <Base title={`${title} — Maarij Alam`} description={blurb}>
@@ -34,13 +40,23 @@ const {
 
   <SpecBlock role={role} period={period} stack={stack} keyResult={keyResult} />
 
-  <Figure src={hero} alt={heroAlt} />
+  {videoInHero ? (
+    <div class="project-hero project-hero--video">
+      <VideoEmbed videoLoop={videoLoop} videoAlt={videoAlt} />
+    </div>
+  ) : (
+    <div class="project-hero" style={heroFocus ? `--hero-focus: ${heroFocus}` : undefined}>
+      <Figure src={hero} alt={heroAlt} />
+    </div>
+  )}
 
   <div class="project-body">
     <slot />
   </div>
 
-  <VideoEmbed youtubeId={youtubeId} />
+  {!videoInHero && (
+    <VideoEmbed youtubeId={youtubeId} videoLoop={videoLoop} videoAlt={videoAlt} />
+  )}
 
   <PrevNext prev={prev} next={next} />
 </Base>
@@ -52,6 +68,22 @@ const {
     text-decoration: none;
   }
   .back-link:hover { color: var(--ink); }
+
+  .project-hero :global(img),
+  .project-hero :global(svg) {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: var(--hero-focus, center center);
+    max-height: 75vh;
+  }
+
+  .project-hero--video :global(.video-embed--loop) { margin: 0 0 var(--space-6); }
+  .project-hero--video :global(video) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    max-height: 75vh;
+  }
 
   .project-body {
     max-width: 60ch;

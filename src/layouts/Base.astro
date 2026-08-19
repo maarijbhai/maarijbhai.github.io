@@ -7,11 +7,13 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  navVariant?: 'light' | 'dark';
 }
 
 const {
   title,
   description = 'Portfolio of Maarij Alam — final-year Electrical & Computer Engineering, University of Cape Town.',
+  navVariant = 'light',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -32,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&family=Source+Serif+4:wght@400;500&display=swap"
     />
 
     <meta property="og:type" content="website" />
@@ -48,7 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Nav />
+    <Nav variant={navVariant} />
     <main id="main">
       <slot />
     </main>

@@ -8,12 +8,13 @@ const projects = (await getCollection('projects')).sort(
 );
 
 const filters = [
-  { label: 'ALL',      value: 'all' },
-  { label: 'HARDWARE', value: 'hardware' },
-  { label: 'EMBEDDED', value: 'embedded' },
-  { label: 'SOFTWARE', value: 'software' },
-  { label: 'ML',       value: 'ml' },
-  { label: 'RF',       value: 'rf' },
+  { label: 'ALL',              value: 'all' },
+  { label: 'HARDWARE',         value: 'hardware' },
+  { label: 'DIGITAL HARDWARE', value: 'digital-hardware' },
+  { label: 'EMBEDDED',         value: 'embedded' },
+  { label: 'SOFTWARE',         value: 'software' },
+  { label: 'ML',               value: 'ml' },
+  { label: 'RF',               value: 'rf' },
 ];
 ---
 

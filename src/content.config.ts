@@ -10,12 +10,16 @@ const projects = defineCollection({
     order:      z.number(),
     featured:   z.boolean().default(false),
     role:       z.string(),            // "Firmware and PCB design"
-    domain:     z.enum(['hardware', 'embedded', 'software', 'ml', 'rf']),
+    domain:     z.enum(['hardware', 'digital-hardware', 'embedded', 'software', 'ml', 'rf']),
     stack:      z.array(z.string()),
     keyResult:  z.string(),            // ONE measured outcome with a number
     hero:       image(),
     heroAlt:    z.string(),
-    youtubeId:  z.string().optional(),
+    heroFocus:  z.string().optional(),   // CSS object-position for the 16:9 crop, e.g. "center 65%"
+    youtubeId:   z.string().optional(),
+    videoLoop:   z.string().optional(),   // absolute path under /public, e.g. "/videos/foo.webm"
+    videoAlt:    z.string().optional(),
+    videoAsHero: z.boolean().default(false),  // if true, videoLoop replaces the hero image on the project page
     repo:       z.string().url().optional(),
     demo:       z.string().url().optional(),
   }),

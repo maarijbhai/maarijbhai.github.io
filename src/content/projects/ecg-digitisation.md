@@ -10,8 +10,8 @@ domain: ml
 stack:
   - "TODO: list stack"
 keyResult: "TODO: one measured outcome with a number"
-hero: ../../assets/placeholders/hero-16x9.svg
-heroAlt: "TODO: alt text describing the intended hero image"
+hero: ../../assets/projects/ecg-digitisation/hero.jpg
+heroAlt: "Twelve-lead ECG scan on pink grid paper showing leads I, II, III, aVR, aVL, aVF and V1–V6, with a rhythm strip along the bottom"
 ---
 
 ## PROBLEM

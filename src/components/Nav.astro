@@ -1,4 +1,9 @@
 ---
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
 const links = [
@@ -15,7 +20,7 @@ function isCurrent(href: string): boolean {
 }
 ---
 
-<header class="site-header">
+<header class:list={['site-header', variant === 'dark' && 'site-header--dark']}>
   <div class="site-header__inner">
     <a class="wordmark" href="/">Maarij Alam</a>
     <nav aria-label="Primary">

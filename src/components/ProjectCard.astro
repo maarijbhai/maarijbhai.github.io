@@ -7,13 +7,14 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, keyResult, domain, hero, heroAlt } = project.data;
+const { title, keyResult, domain, hero, heroAlt, heroFocus } = project.data;
 ---
 
 <a
   class="card"
   href={`/projects/${project.id}/`}
   data-domain={domain}
+  style={heroFocus ? `--hero-focus: ${heroFocus}` : undefined}
 >
   <div class="card__media">
     <Image src={hero} alt={heroAlt} widths={[400, 800, 1200]} sizes="(max-width: 599px) 100vw, (max-width: 899px) 50vw, 33vw" />
@@ -40,6 +41,7 @@ const { title, keyResult, domain, hero, heroAlt } = project.data;
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    object-position: var(--hero-focus, center center);
     border-radius: 0;
     transition: opacity 120ms linear;
   }

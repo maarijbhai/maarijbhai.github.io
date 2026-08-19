@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# staging folder for original media before it's placed in src/assets or public
+pics_vids/

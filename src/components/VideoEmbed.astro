@@ -1,12 +1,32 @@
 ---
 interface Props {
   youtubeId?: string;
+  videoLoop?: string;
+  videoAlt?: string;
   title?: string;
 }
-const { youtubeId, title = 'Project video' } = Astro.props;
+const {
+  youtubeId,
+  videoLoop,
+  videoAlt = 'Silent looping clip of the project in operation.',
+  title = 'Project video',
+} = Astro.props;
 ---
 
-{youtubeId ? (
+{videoLoop ? (
+  <figure class="video-embed video-embed--loop">
+    <video
+      src={videoLoop}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label={videoAlt}
+    ></video>
+    <figcaption class="video-embed__caption mono">{videoAlt}</figcaption>
+  </figure>
+) : youtubeId ? (
   <div class="video-embed">
     <iframe
       src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
@@ -27,7 +47,7 @@ const { youtubeId, title = 'Project video' } = Astro.props;
   .video-embed {
     margin: var(--space-6) 0;
   }
-  .video-embed:not(.video-embed--placeholder) {
+  .video-embed:not(.video-embed--placeholder):not(.video-embed--loop) {
     position: relative;
     aspect-ratio: 16 / 9;
   }
@@ -47,5 +67,18 @@ const { youtubeId, title = 'Project video' } = Astro.props;
     border-radius: 2px;
     min-height: 8rem;
     text-align: center;
+  }
+
+  .video-embed--loop { margin: var(--space-6) 0; }
+  .video-embed--loop video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    background: var(--rule);
+  }
+  .video-embed__caption {
+    margin-top: var(--space-2);
+    color: var(--muted);
   }
 </style>
