@@ -1,49 +1,45 @@
 ---
 title: "USB-C PD charger"
-blurb: "TODO: one-sentence blurb (max 160 chars)"
+blurb: "Compact 2-layer PD power subsystem with 9V negotiation, dual-mode Li-ion charging, load switching, and motor control."
 period: "Mar – Jun 2025"
 order: 3
 featured: false
-role: "Co-designed a compact 2-layer USB-C PD power subsystem with 9V negotiation, dual-mode Li-ion charging, load switching, and motor control"
-# TODO: verify domain — guessed from slug; adjust to hardware | embedded | software | ml | rf
+role: "Co-designed a compact 2-layer USB-C PD power subsystem for an autonomous micromouse."
 domain: hardware
 stack:
   - "KiCAD"
   - "LTSpice"
-keyResult: "USB-C PD negotiated to 8.95 V; 856 mA delivered at 4.2 V"
+keyResult: "USB-C PD negotiated to 8.95V; 856mA delivered at 4.2V."
 hero: ../../assets/projects/usb-c-pd-charger/hero.png
-heroAlt: "USB-C PD charger PCB — 3D render of the assembled green board with USB-C connector, tactile switch, and labelled test points"
+heroAlt: "USB-C PD charger PCB: 3D render of the assembled green board with USB-C connector, tactile switch, and labelled test points"
+teamPhoto: ../../assets/projects/usb-c-pd-charger/saeed.jpg
+teamAlt: "Project partner Saeed holding the assembled USB-C PD charger PCB fresh from JLCPCB"
+teamCaption: "The actual PCB we received from JLCPCB, held by my project partner Saeed."
 ---
 
 ## PROBLEM
 
-Designed the power subsystem for an autonomous micromouse, providing USB-C battery charging, regulated 3V3 and 5V rails, independently switchable external loads, and motor control within strict PCB size, budget, and component-sourcing constraints.
+Design the power subsystem for an autonomous micromouse: USB-C battery charging, regulated 3V3 and 5V rails, independently switchable external loads, and motor control, all within tight size, budget, and sourcing limits.
 
 ## CONSTRAINTS
 
-9V USB-C PD input
-200mA slow charging mode
-600mA fast charging mode
-Two independently switchable 5V loads rated for 1A each
-3V3 and 5V regulated output rails
-Bidirectional control of 4 motors
-Compact 2-layer PCB
-Components sourced through JLCPCB
-Approximately 3-month development period
-BOM cost of $25
+- 9V USB-C PD input.
+- 200mA slow and 600mA fast Li-ion charging modes.
+- Two independently switchable 5V loads, 1A each.
+- 3V3 and 5V regulated rails.
+- Bidirectional control of 4 motors.
+- 2-layer PCB, components via JLCPCB, ~3 months, $25 BOM.
 
 ## WHAT I BUILT
 
-Designed and implemented a 2-layer PCB integrating a USB-C connector and HUSB237 PD sink controller for 9V negotiation, a BQ24074RGT Li-ion charging IC with GPIO-controlled charging modes, RT9742 high-side switches for external loads, power regulation, test points, status LEDs, and interfaces to the processor and motor circuitry.
+A 2-layer PCB with a USB-C connector and HUSB237 PD sink for 9V negotiation, a BQ24074RGT Li-ion charger with GPIO-selectable modes, RT9742 high-side switches for the external loads, regulation for the 3V3 and 5V rails, status LEDs, test points, and the processor and motor interfaces.
 
 ## RESULT
 
-USB-C output: 8.95V
-Slow charging current: 180mA
-Fast charging current: 180mA
-Load 1: 856mA at 4.2V
-Load 2: 840mA at 4.0V
+- USB-C output: 8.95V.
+- Slow charge: 180mA. Fast charge: 180mA.
+- Load 1: 856mA at 4.2V. Load 2: 840mA at 4.0V.
 
 ## WHAT I'D DO DIFFERENTLY
 
-I would design with greater thermal and electrical headroom from the beginning. The fast-charge path was limited by thermal regulation in the charging IC, while the load switches could not sustain the required current at the target voltage. I would improve thermal management, add current limiting and fault feedback, leave more copper and physical space around high-current components, and validate component selection against worst-case operating conditions before fabrication.
+Design with more thermal and electrical headroom from the start. Fast-charge was limited by the charger IC's thermal regulation, and the load switches couldn't sustain the target current at voltage. Next time: better thermal management, current limiting with fault feedback, more copper around high-current parts, and worst-case validation of every part before fabrication.

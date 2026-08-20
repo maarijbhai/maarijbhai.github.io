@@ -24,10 +24,14 @@ const {
   hero,
   heroAlt,
   heroFocus,
+  heroFit,
   youtubeId,
   videoLoop,
   videoAlt,
   videoAsHero,
+  teamPhoto,
+  teamAlt,
+  teamCaption,
 } = project.data;
 
 const videoInHero = videoAsHero && !!videoLoop;
@@ -45,7 +49,10 @@ const videoInHero = videoAsHero && !!videoLoop;
       <VideoEmbed videoLoop={videoLoop} videoAlt={videoAlt} />
     </div>
   ) : (
-    <div class="project-hero" style={heroFocus ? `--hero-focus: ${heroFocus}` : undefined}>
+    <div
+      class:list={['project-hero', heroFit === 'contain' && 'project-hero--contain']}
+      style={heroFocus ? `--hero-focus: ${heroFocus}` : undefined}
+    >
       <Figure src={hero} alt={heroAlt} />
     </div>
   )}
@@ -54,9 +61,13 @@ const videoInHero = videoAsHero && !!videoLoop;
     <slot />
   </div>
 
-  {!videoInHero && (
+  {teamPhoto ? (
+    <div class="project-team">
+      <Figure src={teamPhoto} alt={teamAlt ?? ''} caption={teamCaption} />
+    </div>
+  ) : (!videoInHero && (
     <VideoEmbed youtubeId={youtubeId} videoLoop={videoLoop} videoAlt={videoAlt} />
-  )}
+  ))}
 
   <PrevNext prev={prev} next={next} />
 </Base>
@@ -77,12 +88,23 @@ const videoInHero = videoAsHero && !!videoLoop;
     max-height: 75vh;
   }
 
+  .project-hero--contain :global(img),
+  .project-hero--contain :global(svg) {
+    object-fit: contain;
+    background: var(--rule);
+  }
+
   .project-hero--video :global(.video-embed--loop) { margin: 0 0 var(--space-6); }
   .project-hero--video :global(video) {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     max-height: 75vh;
+  }
+
+  .project-team {
+    max-width: 22rem;
+    margin: var(--space-6) 0;
   }
 
   .project-body {

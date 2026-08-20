@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 
 const email = 'maarij.alam@outlook.com';
 const github = 'https://github.com/maarijbhai';
-// TODO: LinkedIn URL
+const linkedin = 'https://www.linkedin.com/in/maarij-alam-52a771398/';
 ---
 
 <Base title="Contact — Maarij Alam">
@@ -26,7 +26,7 @@ const github = 'https://github.com/maarijbhai';
 
     <div class="contact__row">
       <dt class="mono">LINKEDIN</dt>
-      <dd>href = https://www.linkedin.com/in/maarij-alam-52a771398/</dd>
+      <dd><a href={linkedin}>{linkedin.replace(/^https?:\/\//, '')}</a></dd>
     </div>
   </dl>
 </Base>

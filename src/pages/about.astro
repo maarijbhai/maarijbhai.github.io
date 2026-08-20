@@ -1,51 +1,73 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
-import portrait from '../assets/portrait.svg';
+import portrait from '../assets/mj_chill.jpg';
 ---
 
 <Base title="About — Maarij Alam">
-  <h1>About</h1>
+  <h1 class="about__heading">About</h1>
 
   <div class="about">
     <div class="about__portrait">
-      <Image src={portrait} alt="TODO: alt text describing the portrait" widths={[400, 600, 800]} sizes="(max-width: 640px) 60vw, 240px" />
+      <Image src={portrait} alt="Maarij Alam, casual portrait" widths={[320, 480, 640]} sizes="(max-width: 900px) 280px, 320px" />
     </div>
 
     <div class="about__prose">
-      <p>TODO: opening paragraph — who I am, what I'm studying, where I'm from and where I'm heading.</p>
+      <p>For most of my early life, I grew up in Polokwane, Limpopo and matriculated at PEPPS College. After matriculation I decided to follow my dreams of being an engineer and moved to Cape Town to study ECE at UCT.</p>
 
-      <p>TODO: the path into engineering — how I got here, what drew me toward embedded systems and RF, and where the pull toward software is coming from.</p>
+      <p>At university I really enjoyed taking classes in computer science and embedded systems. My absolute favourite courses are the design courses that I took from 3rd year: EEE3088F (which I ended up tutoring the following year), EEE3099S and EEE4114F. These are the courses where I actually designed and built something. It was a really gruelling but rewarding experience and it solidified my passion for engineering.</p>
 
-      <p>TODO: the AQUA Project internship — what it is, what I built, what I took away.</p>
+      <p>I engaged in two different internships whilst at university. For my first internship, I helped master's student Timothy Reddy develop a dual-camera failure detection system for an open-source 3D printer using computer vision. For my second internship with MechatronicSystems.Group, I co-developed a MATLAB application that integrated live OpenMV camera feeds with an Extended Kalman Filter (EKF) for real-time 3D position and velocity visualisation for drones.</p>
 
-      <p>TODO: tutoring EEE3088F — what I teach, what I've learned from teaching it.</p>
+      <p>Beyond engineering, I have participated in various leadership and volunteering roles. I volunteered to be a mentor to the first year cohort of electrical engineering students in 2024. I served as a class representative for UCT's Department of Electrical Engineering for 2023, 2024 and 2026. My favourite opportunity was being an Orientation Leader for the Department of Electrical Engineering, where I helped a group of incoming first years find their feet in their first week; showing them around, answering the questions they were too nervous to ask in a lecture hall, and reminding them that everyone feels lost at the start.</p>
 
-      <p>TODO: closing paragraph — how I think about engineering work, and what I'm looking for after I graduate in 2026.</p>
+      <p>  What I like most about engineering is the feeling when something works that didn't before. I am particularly interested in computer applications in the medical field. I'm graduating in November 2026 and looking for graduate work in Cape Town, ideally somewhere in the software layer to start off with.</p>
+
     </div>
   </div>
 </Base>
 
 <style>
+  .about__heading {
+    margin-bottom: var(--space-6);
+  }
+
   .about {
     display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    gap: var(--space-7);
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 56px;
     align-items: start;
-    margin-top: var(--space-6);
+  }
+
+  .about__portrait {
+    width: 320px;
+    position: sticky;
+    top: 96px;
   }
   .about__portrait :global(img),
   .about__portrait :global(svg) {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
     border-radius: 0;
   }
-  .about__prose { max-width: 60ch; }
-  .about__prose p { margin-bottom: var(--space-4); }
 
-  @media (max-width: 640px) {
-    .about { grid-template-columns: 1fr; gap: var(--space-6); }
-    .about__portrait { max-width: 240px; }
+  .about__prose { max-width: 62ch; }
+  .about__prose p { margin-bottom: 1.4em; }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .about__portrait {
+      width: 100%;
+      max-width: 280px;
+      position: static;
+      top: auto;
+    }
   }
 </style>

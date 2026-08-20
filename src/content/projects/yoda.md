@@ -1,10 +1,10 @@
 ---
 title: "Project YODA"
-blurb: "Neural Inference Accelerator co-processor for the StarCore-1 CPU — autonomously computes vector dot products in hardware at 5.2× the speed of software."
+blurb: "Neural Inference Accelerator co-processor for the StarCore-1 CPU. Computes vector dot products in hardware at 5.2x software speed."
 period: "May 2026"
 order: 6
 featured: false
-role: "I designed and implemented the NIA co-processor in Verilog — the MAC datapath, control FSM, internal memory, and a three-level testbench verification stack."
+role: "Designed and implemented the NIA co-processor in Verilog: MAC datapath, control FSM, internal memory, and a three-level verification stack."
 domain: digital-hardware
 stack:
   - "Verilog (Icarus iVerilog)"
@@ -12,55 +12,54 @@ stack:
   - "Yosys"
   - "Python"
   - "Make"
-keyResult: "5.2× speedup over StarCore-1 software — verified across N = 1 to 128 elements at all three testbench levels against an independent Python gold standard"
-hero: ../../assets/placeholders/hero-16x9.svg
-heroAlt: "GTKWave waveform showing the NIA accumulator building up across a 4-element dot product, with the done signal pulsing at completion"
+keyResult: "5.2x speedup over StarCore-1 software, verified across N = 1 to 128 against an independent Python gold standard."
+hero: ../../assets/projects/yoda/hero.jpg
+heroAlt: "Project YODA flyer showing the NIA co-processor architecture and results"
+heroFit: contain
 ---
 
 ## PROBLEM
 
-The StarCore-1 is a 16-bit single-cycle RISC processor with no hardware multiplier. A single 16-bit multiplication requires approximately 20 cycles of shift-and-add in software. Neural network inference is dominated by one operation — the dot product Σ A[i]·B[i] — which means an N-element inference pass costs **26N + 3 cycles** on the base CPU, with the processor fully occupied and unable to execute any other logic for the duration.
-
-The EEE4120F HPES project brief required groups to evolve the StarCore-1 baseline using Amdahl's Law principles — either by extending the ISA or attaching an external co-processor. The MAC loop is the dominant bottleneck in inference workloads, making it the highest-leverage target for acceleration.
+The StarCore-1 is a 16-bit single-cycle RISC with no hardware multiplier. A 16-bit multiply takes ~20 cycles of shift-and-add. Neural inference is dominated by one operation, the dot product Σ A[i]·B[i], costing **26N + 3 cycles** per pass on the base CPU with the processor fully occupied. The EEE4120F HPES brief required Amdahl-style acceleration of this bottleneck.
 
 ## CONSTRAINTS
 
-- **ISA compatibility:** The StarCore-1 ISA must remain unchanged for non-ML workloads — only the reserved opcode `1010` may be used
-- **Simulation only:** No physical FPGA — full verification must be achieved through iVerilog simulation and GTKWave waveform analysis
-- **Modularity:** Each hardware block must be a separate `.v` file corresponding to a distinct physical unit
-- **Verification:** Hardware results must match an independent software gold standard across all test vector sizes
-- **Data width:** Operands are 16-bit; accumulator must be 32-bit to hold full-precision 16×16 products without overflow
+- Reserved opcode `1010` only; ISA otherwise unchanged.
+- Simulation only, via iVerilog and GTKWave.
+- Each block in its own `.v` file for a distinct physical unit.
+- Hardware results must match an independent software gold standard for every N.
+- 16-bit operands, 32-bit accumulator to hold full-precision products.
 
 ## WHAT I BUILT
 
-A fully autonomous NIA co-processor in Verilog, structured as five hardware modules wired together at the top level with no logic in the interconnect:
+A fully autonomous NIA co-processor in Verilog, five modules with no logic in the top-level:
 
-- **`nia_memory.v`** — 256×16-bit single-port synchronous RAM storing both vector A and vector B in separate address ranges, with a DMA write port for testbench preloading
-- **`nia_mac.v`** — combinational 16×16 multiplier feeding a 32-bit accumulator register; clears on the first element of each dot product and accumulates thereafter
-- **`nia_controller.v`** — 7-state FSM (`IDLE → FETCH_A → LATCH_A → FETCH_B → COMPUTE → CHECK → FINISH`) that sequences the entire dot product loop autonomously; because the RAM is single-port, A[i] is read and latched internally before B[i] is fetched, giving **5 cycles per element + 2 overhead**
-- **`nia_output_reg.v`** — output latch that captures the 32-bit accumulator onto the 16-bit co-processor result bus when the FSM asserts `done`
-- **`nia_top.v`** — purely structural top-level that instantiates and wires all four submodules; contains no combinational or sequential logic of its own
+- **`nia_memory.v`**: 256x16-bit single-port RAM holding vectors A and B, with a DMA write port for testbench preloading.
+- **`nia_mac.v`**: combinational 16x16 multiplier feeding a 32-bit accumulator; clears on the first element, accumulates thereafter.
+- **`nia_controller.v`**: 7-state FSM (`IDLE, FETCH_A, LATCH_A, FETCH_B, COMPUTE, CHECK, FINISH`) that sequences the dot product loop. Single-port RAM forces A[i] to be latched before B[i] is fetched, giving 5 cycles per element plus 2 overhead.
+- **`nia_output_reg.v`**: captures the 32-bit accumulator onto the 16-bit result bus when `done` fires.
+- **`nia_top.v`**: purely structural wiring.
 
-The StarCore-1 was extended with two instruction variants under opcode `1010`: **DISPATCH** (passes base addresses and vector length to the NIA, pulses `start`, PC advances immediately) and **RECEIVE** (stalls the PC until `done` is asserted, then writes the result into a register). This gives an asynchronous co-processor API — the CPU can overlap other work between dispatch and receive.
+StarCore-1 gained two opcode-`1010` variants: **DISPATCH** (pass base addresses and length, pulse `start`, PC advances) and **RECEIVE** (stall PC until `done`, write result to a register). The CPU can overlap other work between the two.
 
-Verification was implemented at three levels, all checked against an independent Python gold standard (`gold = (Σ A[i]·B[i]) & 0xFFFF`):
+Verification ran at three levels against a Python gold standard `gold = (Σ A[i]·B[i]) & 0xFFFF`:
 
-1. **`tb_mac.v`** — MAC unit in isolation, hand-crafted test cases including large-value overflow verification
-2. **`tb_nia_top.v`** — full NIA pipeline across N = 1, 2, 4, 8, 16, 32, 64, 128
-3. **`tb_soc.v`** — full SoC integration: StarCore executes a real program (LD / LD / LD / DISPATCH / RECEIVE / JMP) and the result is verified in the register file
+1. `tb_mac.v`: MAC in isolation, including overflow cases.
+2. `tb_nia_top.v`: full NIA across N = 1, 2, 4, 8, 16, 32, 64, 128.
+3. `tb_soc.v`: full SoC running a real program (LD, LD, LD, DISPATCH, RECEIVE, JMP), result checked in the register file.
 
-A Python benchmark script (`scripts/benchmark_auto.py`) sweeps N and compares hardware cycle counts against the software model, producing the speedup curve. Yosys + netlistsvg were used to generate SVG schematic views of each NIA module.
+A benchmark script sweeps N and plots the speedup curve. Yosys plus netlistsvg render each module's schematic.
 
-A real hardware bug was caught during development: the single-port RAM means A[i] is overwritten by B[i] on the memory output bus before the MAC unit can consume it. The fix was an internal latch register in the controller that captures A[i] in the `LATCH_A` state before the B[i] read is issued — a decision that added one FSM state but eliminated a subtle data hazard.
+The single-port RAM caused a real bug: A[i] was overwritten by B[i] on the bus before the MAC could consume it. Fix: an internal latch in the controller captures A[i] in the `LATCH_A` state, at the cost of one extra FSM state.
 
 ## RESULT
 
-- **Speedup:** 5.2× asymptotic over StarCore-1 software (NIA: 5N+2 cycles vs software: 26N+3 cycles)
-- **N=32:** 162 cycles vs 835 cycles — 5.15× faster
-- **N=128:** 642 cycles vs 3331 cycles — 5.19× faster
-- All three testbench levels pass for every N in {1, 2, 4, 8, 16, 32, 64, 128}
-- Full SoC demo: StarCore program executes correctly, R3 holds the correct dot product at halt
+- 5.2x asymptotic speedup (NIA: 5N+2 vs software: 26N+3).
+- N=32: 162 vs 835 cycles, 5.15x.
+- N=128: 642 vs 3331 cycles, 5.19x.
+- All three testbenches pass for every N in {1, 2, 4, 8, 16, 32, 64, 128}.
+- SoC demo: R3 holds the correct dot product at halt.
 
 ## WHAT I'D DO DIFFERENTLY
 
-The single-port memory is the primary bottleneck — fetching A[i] and B[i] on separate cycles is what drives the 5-cycle-per-element cost rather than the theoretical 1-cycle minimum. A dual-port RAM would allow simultaneous A[i] and B[i] reads, cutting the per-element cost roughly in half and pushing the speedup toward 10×. I would also implement signed arithmetic from the start — the current design treats all operands as unsigned, which is a significant limitation for real neural network weights that are typically signed fixed-point values. Finally, a DMA engine that transfers vectors directly from the StarCore data memory into the NIA RAM would remove the need for testbench-level memory preloading and make the DISPATCH instruction fully self-contained.
+Move to dual-port RAM so A[i] and B[i] are fetched in the same cycle. That halves the per-element cost and pushes speedup toward 10x. Add signed arithmetic from the start, since real weights are signed fixed-point. Add a DMA engine that transfers vectors from StarCore memory into the NIA RAM so DISPATCH is self-contained.

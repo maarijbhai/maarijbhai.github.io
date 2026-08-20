@@ -1,177 +1,103 @@
-PORTFOLIO CHECKLIST
-===================
+PORTFOLIO CHECKLIST (updated 20 Aug 2026)
+=========================================
 
-Work top to bottom. Each stage leaves the site looking a bit
-more finished than the last, so stopping partway is safe.
+Status snapshot
+---------------
+DONE
+  Home hero, home intro, about page prose, portrait, CV PDF live,
+  LinkedIn hyperlink working, SIREN team photo + caption in place.
+  Four projects have real content: Project SIREN, USB-C PD charger,
+  Micromouse, Project YODA.
 
-
-STAGE 1 - QUICK WINS (make the top of the site look real)
----------------------------------------------------------
-These are small paste-in jobs that fix the most visible gaps.
-
-[ ] 1.1  Home headline
-         File: src/pages/index.astro, line 18
-         Replace: TODO: main positioning headline
-         With:    your one-line positioning statement
-                  (e.g. "Final-year ECE building embedded systems
-                  and the software around them.")
-
-[ ] 1.2  Home intro paragraph
-         File: src/pages/index.astro, line 20
-         Replace: TODO: intro paragraph...
-         With:    1-3 sentences, ~52ch wide
-
-[ ] 1.3  LinkedIn URL
-         File: src/pages/contact.astro
-         - Line 6:  delete the "// TODO: LinkedIn URL" comment
-         - Line 29: replace TODO with
-                    <a href="https://linkedin.com/in/YOUR-HANDLE">
-                      linkedin.com/in/YOUR-HANDLE
-                    </a>
-
-[ ] 1.4  CV PDF
-         Drop the file at: public/cv/maarij-cv.pdf
-         (Create the "cv" folder if it isn't there.)
-         The CV page will auto-swap from placeholder to viewer.
+STILL TO DO (in priority order below)
 
 
-STAGE 2 - ABOUT PAGE (the second page a marker lands on)
---------------------------------------------------------
+1. FILL OR REMOVE THE TWO EMPTY PROJECTS
+----------------------------------------
+Both files are still template stubs. They will render on the
+projects grid with placeholder heroes and empty bodies, which
+looks unfinished.
 
-[ ] 2.1  Portrait photo
-         Drop the file at: src/assets/portrait.jpg
-         Then in src/pages/about.astro:
-           change  import portrait from '../assets/portrait.svg';
-           to      import portrait from '../assets/portrait.jpg';
+    src/content/projects/ecg-digitisation.md
+    src/content/projects/voice-triage-pwa.md
 
-[ ] 2.2  Portrait alt text
-         File: src/pages/about.astro, line 12
-         Replace: alt="TODO: alt text describing the portrait"
-         With:    e.g. alt="Maarij Alam, head-and-shoulders portrait,
-                            UCT engineering building"
+For each, either:
 
-[ ] 2.3  About prose (5 paragraphs, ~400 words total, first person)
-         File: src/pages/about.astro
-         - Line 16: opening - who you are, what you're studying,
-                    where you're heading
-         - Line 18: path into engineering - what drew you toward
-                    embedded systems and RF, growing pull toward
-                    software
-         - Line 20: AQUA Project internship - what it is, what you
-                    built, what you took away
-         - Line 22: tutoring EEE3088F - what you teach, what you've
-                    learned from teaching
-         - Line 24: closing - how you think about engineering, what
-                    you're looking for after graduating in 2026
+  (a) Fill it out (mirror the pattern in yoda.md or
+      antarctic-remote-sensing.md):
+      [ ] frontmatter: blurb, period, role, domain, stack,
+          keyResult (one measured number), heroAlt
+      [ ] body sections: PROBLEM, CONSTRAINTS, WHAT I BUILT,
+          RESULT (numbers only), WHAT I'D DO DIFFERENTLY
+      [ ] real hero image in
+          src/assets/projects/<slug>/hero.jpg
+          then point the frontmatter hero: field at it
+      Note: pics_vids/ECG.jpg is ready to drop in for
+      ecg-digitisation.
+
+  (b) Delete the file if the project won't ship in time.
+      Removing the .md file automatically removes it from the
+      grid, filter chips, prev/next chain, and sitemap.
 
 
-STAGE 3 - PICK AND FILL 3 FEATURED PROJECTS
--------------------------------------------
-The home page shows 3 project cards; the projects grid shows all 5.
-Fill your 3 strongest first - the site will look complete after this
-step even if the other 2 stay as stubs.
-
-Files (pick 3):
-  src/content/projects/ecg-digitisation.md         (I guessed: ml)
-  src/content/projects/antarctic-remote-sensing.md (I guessed: rf)
-  src/content/projects/usb-c-pd-charger.md         (I guessed: hardware)
-  src/content/projects/micromouse.md               (I guessed: embedded)
-  src/content/projects/voice-triage-pwa.md         (I guessed: software)
-
-For each of the 3 you pick, do all of the following:
-
-[ ] 3.1  Set  featured: true  (currently false)
-
-[ ] 3.2  Confirm or change  domain:  to one of
-         hardware / embedded / software / ml / rf
-
-[ ] 3.3  Fill frontmatter fields (between the --- fences):
-         [ ] blurb       one sentence, max 160 chars
-         [ ] period      e.g. "Mar - Jun 2025"
-         [ ] role        e.g. "Firmware and PCB design"
-         [ ] stack       YAML list, one - "item" per line
-         [ ] keyResult   ONE measured number (required)
-         [ ] heroAlt     describes the REAL hero image
-                         (e.g. "assembled power board showing
-                          buck converter stage")
-
-[ ] 3.4  Fill body sections (below the --- fences)
-         [ ] ## PROBLEM                 one paragraph
-         [ ] ## CONSTRAINTS             one paragraph
-         [ ] ## WHAT I BUILT            one paragraph
-         [ ] ## RESULT                  numbers only, no adjectives
-         [ ] ## WHAT I'D DO DIFFERENTLY honest reflection
-
-[ ] 3.5  Hero image
-         Create folder:  src/assets/projects/<slug>/
-         Drop file:      hero.jpg  (or .png)
-                         ideally 1600 x 900, under 500 KB
-         Then in the .md file, change
-           hero: ../../assets/placeholders/hero-16x9.svg
-         to
-           hero: ../../assets/projects/<slug>/hero.jpg
+2. MICROMOUSE: DESCRIBE THE FINAL TURN METHOD
+---------------------------------------------
+    src/content/projects/micromouse.md
+The WHAT I BUILT section has a TODO in the "Turning" paragraph
+(gyro was removed, but the current method is not written up).
+One sentence covers it. Options are:
+  [ ] two-stage encoder turn (fast then slow)
+  [ ] timed turn against a wall
+  [ ] something else, then say what
 
 
-STAGE 4 - FILL THE REMAINING 2 PROJECTS
----------------------------------------
-Repeat every step of Stage 3 for the other 2 project files.
-No need to mark these featured unless you want them on the home
-page (only the first 3 featured show).
+3. PICK 3 FEATURED PROJECTS (OPTIONAL POLISH)
+---------------------------------------------
+Right now no project has featured: true, so the home page falls
+back to showing the first 3 by "order". That is fine, but if
+you would rather choose your top 3 explicitly:
 
-[ ] 4.1  Project A: __________________________
-[ ] 4.2  Project B: __________________________
+  [ ] Set  featured: true  in exactly 3 project .md files.
 
 
-STAGE 5 - OPTIONAL EXTRAS
--------------------------
+4. HOME PAGE: DECIDE ON THE COMMENTED-OUT PARAGRAPH
+---------------------------------------------------
+    src/pages/index.astro  around line 86
+There is a commented-out paragraph mentioning ECG digitisation
+and drones. Either uncomment and use it, or delete it.
+
+
+5. OPTIONAL EXTRAS
+------------------
 Nice-to-haves. None of these block completeness.
 
-[ ] 5.1  Video for a project
-         Get an unlisted YouTube upload, then in the project's .md
-         frontmatter add:
-           youtubeId: "abc123XYZ"      (the 11-char ID from the URL)
+    [ ] Extra figures in a project body:
+        Drop  figure-01.jpg,  figure-02.jpg  into
+          src/assets/projects/<slug>/
+        Reference in the markdown body:
+          ![what the picture shows](./figure-01.jpg)
 
-[ ] 5.2  Extra figures in a project body
-         Drop  figure-01.jpg,  figure-02.jpg  into
-           src/assets/projects/<slug>/
-         Reference in the markdown body:
-           ![what the picture shows](./figure-01.jpg)
+    [ ] Optional repo or demo links in a project's frontmatter:
+          repo: "https://github.com/maarijbhai/..."
+          demo: "https://..."
 
-[ ] 5.3  Optional repo/demo links
-         In a project's frontmatter, add:
-           repo: "https://github.com/maarijbhai/…"
-           demo: "https://…"
+    [ ] README.md is still the Astro default. Worth 2-3
+        sentences for the marker.
 
-[ ] 5.4  README.md
-         Currently the Astro default. Worth 2-3 sentences about
-         what this repo is, for the marker.
+    [ ] pics_vids/SIREN.jpeg and pcb.png are unused. Consider
+        adding them as figure-01/02 in their respective projects.
 
 
-STAGE 6 - ADDING MORE PROJECTS LATER
-------------------------------------
-The pipeline is fully dynamic. To add a new project:
-
-[ ] 6.1  Copy any existing file in src/content/projects/
-         Rename to  <new-slug>.md
-[ ] 6.2  Fill the same fields as Stage 3
-[ ] 6.3  Give it a unique  order:  number
-[ ] 6.4  Create folder  src/assets/projects/<new-slug>/
-         and drop a hero image in
-[ ] 6.5  Point the  hero:  field there
-[ ] 6.6  Rebuild - it auto-appears in the grid, filters,
-         prev/next chain, and sitemap
-
-If the new project doesn't fit hardware/embedded/software/ml/rf,
-tell Claude to extend the domain list and filter chips.
-
-
-WHEN CONTENT IS READY
----------------------
-Paste it into chat (or just tell Claude which file+line to open)
-and it will be wired in. Then:
-
-[ ] Run  npm run build  to confirm no errors
-[ ] Commit and push - GitHub Actions redeploys the site
+BEFORE HANDING IN
+-----------------
+    [ ] npm run build (confirm no errors)
+    [ ] click every nav link, every project card, every footer
+        link, every CV/LinkedIn/GitHub link (zero broken links
+        is a marked criterion)
+    [ ] resize the browser to 360px width and check the home
+        page, projects grid, and one project page
+    [ ] commit and push, then wait for the GitHub Actions run
+        to finish before checking the live site
 
 
 PATH REFERENCE
@@ -184,6 +110,5 @@ Projects grid ........ src/pages/projects/index.astro
 Project template ..... src/layouts/Project.astro
 Project markdown ..... src/content/projects/<slug>.md
 Project images ....... src/assets/projects/<slug>/
-Portrait ............. src/assets/portrait.jpg (after swap)
+Portrait ............. src/assets/portrait.jpg
 CV PDF ............... public/cv/maarij-cv.pdf
-Placeholders ......... src/assets/placeholders/
