@@ -7,11 +7,11 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, keyResult, domain, hero, heroAlt, heroFocus } = project.data;
+const { title, keyResult, domain, hero, heroAlt, heroFocus, heroFit } = project.data;
 ---
 
 <a
-  class="card"
+  class:list={['card', heroFit === 'contain' && 'card--contain']}
   href={`/projects/${project.id}/`}
   data-domain={domain}
   style={heroFocus ? `--hero-focus: ${heroFocus}` : undefined}
@@ -44,6 +44,11 @@ const { title, keyResult, domain, hero, heroAlt, heroFocus } = project.data;
     object-position: var(--hero-focus, center center);
     border-radius: 0;
     transition: opacity 120ms linear;
+  }
+  .card--contain :global(img),
+  .card--contain :global(svg) {
+    object-fit: contain;
+    background: var(--rule);
   }
   .card:hover :global(img),
   .card:hover :global(svg) { opacity: 0.9; }

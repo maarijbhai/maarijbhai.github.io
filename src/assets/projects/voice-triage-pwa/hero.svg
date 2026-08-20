@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="scoreCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E5BE8"/>
+      <stop offset="100%" stop-color="#0B3BAE"/>
+    </linearGradient>
+    <clipPath id="phoneClip">
+      <rect x="122" y="118" width="368" height="666" rx="26"/>
+    </clipPath>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1B4DB1"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FBFBF9"/>
+
+  <!-- ============ LEFT: PHONE ============ -->
+  <rect x="112" y="108" width="388" height="686" rx="36" fill="#14181D"/>
+  <rect x="122" y="118" width="368" height="666" rx="26" fill="#F4F6F9"/>
+
+  <g clip-path="url(#phoneClip)">
+    <text x="146" y="148" font-size="13" font-weight="600" fill="#14181D">9:41</text>
+    <rect x="432" y="137" width="27" height="12" rx="2.5" fill="none" stroke="#14181D" stroke-width="1.4"/>
+    <rect x="435" y="140" width="20" height="6" rx="1.2" fill="#14181D"/>
+
+    <!-- score card -->
+    <rect x="144" y="166" width="324" height="162" rx="16" fill="url(#scoreCard)"/>
+    <text x="166" y="194" font-size="10" font-weight="600" letter-spacing="1.3" fill="#AFC6F5">CONTINUITY SCORE</text>
+    <circle cx="212" cy="254" r="37" fill="none" stroke="#3D6FE0" stroke-width="8"/>
+    <circle cx="212" cy="254" r="37" fill="none" stroke="#FFFFFF" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="214 233" transform="rotate(-90 212 254)"/>
+    <text x="212" y="254" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">92%</text>
+    <text x="212" y="272" font-size="8.5" letter-spacing="0.7" fill="#C5D6F8" text-anchor="middle">ADHERENCE</text>
+    <g font-size="15" font-weight="700" fill="#FFFFFF">
+      <text x="292" y="222">14 Days</text>
+      <text x="292" y="264">3 Days</text>
+      <text x="292" y="306">08:00 daily</text>
+    </g>
+    <g font-size="10" fill="#B9CDF7">
+      <text x="292" y="237">Current streak</text>
+      <text x="292" y="279">Until next refill</text>
+      <text x="292" y="321">Daily dose time</text>
+    </g>
+    <circle cx="277" cy="218" r="5" fill="#FF7A7A"/>
+    <circle cx="277" cy="260" r="5" fill="#E8A33D"/>
+    <circle cx="277" cy="302" r="5" fill="#7FD6A8"/>
+
+    <!-- banner -->
+    <rect x="144" y="342" width="324" height="58" rx="12" fill="#E3F4EC"/>
+    <circle cx="172" cy="371" r="10" fill="#C4E8D7"/>
+    <text x="172" y="375" font-size="11" text-anchor="middle" fill="#1F7A52">★</text>
+    <text x="193" y="367" font-size="11" fill="#1F5B41">Great job staying consistent this month!</text>
+    <text x="193" y="384" font-size="11" fill="#1F5B41">You're in the top 15% of patients.</text>
+
+    <!-- medication -->
+    <rect x="144" y="414" width="324" height="104" rx="14" fill="#FFFFFF"/>
+    <text x="166" y="441" font-size="9.5" font-weight="600" letter-spacing="1.1" fill="#7A8697">CURRENT MEDICATION</text>
+    <text x="166" y="468" font-size="13" font-weight="600" fill="#14181D">Tenofovir / Lamivudine / Dolutegravir</text>
+    <rect x="166" y="486" width="280" height="6" rx="3" fill="#E4E9F0"/>
+    <rect x="166" y="486" width="234" height="6" rx="3" fill="#1E5BE8"/>
+    <text x="446" y="480" font-size="10" fill="#7A8697" text-anchor="end">3 days left</text>
+
+    <!-- this week -->
+    <rect x="144" y="532" width="324" height="138" rx="14" fill="#FFFFFF"/>
+    <text x="166" y="559" font-size="9.5" font-weight="600" letter-spacing="1.1" fill="#7A8697">THIS WEEK</text>
+    <g>
+      <rect x="166" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+      <rect x="206" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+      <rect x="246" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+      <rect x="286" y="574" width="32" height="32" rx="8" fill="#F08A7E"/>
+      <rect x="326" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+      <rect x="366" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+      <rect x="406" y="574" width="32" height="32" rx="8" fill="#5BC98F"/>
+    </g>
+    <g font-size="9" fill="#7A8697" text-anchor="middle">
+      <text x="182" y="624">MON</text><text x="222" y="624">TUE</text><text x="262" y="624">WED</text>
+      <text x="302" y="624">THU</text><text x="342" y="624">FRI</text><text x="382" y="624">SAT</text>
+      <text x="422" y="624">SUN</text>
+    </g>
+    <g font-size="9" fill="#7A8697">
+      <rect x="212" y="644" width="8" height="8" rx="2" fill="#5BC98F"/><text x="226" y="651">Taken</text>
+      <rect x="270" y="644" width="8" height="8" rx="2" fill="#E8A33D"/><text x="284" y="651">Late</text>
+      <rect x="322" y="644" width="8" height="8" rx="2" fill="#F08A7E"/><text x="336" y="651">Missed</text>
+    </g>
+
+    <!-- nav -->
+    <rect x="122" y="712" width="368" height="72" fill="#FFFFFF"/>
+    <line x1="122" y1="712" x2="490" y2="712" stroke="#E4E9F0" stroke-width="1"/>
+    <g font-size="8.5" letter-spacing="0.5" text-anchor="middle" fill="#9AA4B0">
+      <text x="168" y="760">TRIAGE</text><text x="260" y="760">PRICES</text>
+      <text x="352" y="760" fill="#1E5BE8" font-weight="600">SKIPQUEUE</text>
+      <text x="444" y="760">MY HEALTH</text>
+    </g>
+    <circle cx="168" cy="740" r="6" fill="none" stroke="#9AA4B0" stroke-width="1.6"/>
+    <circle cx="260" cy="740" r="6" fill="none" stroke="#9AA4B0" stroke-width="1.6"/>
+    <rect x="346" y="734" width="12" height="12" rx="2.5" fill="#1E5BE8"/>
+    <circle cx="444" cy="740" r="6" fill="none" stroke="#9AA4B0" stroke-width="1.6"/>
+  </g>
+
+  <!-- ============ RIGHT: ARCHITECTURE ============ -->
+  <g font-family="'IBM Plex Mono', ui-monospace, monospace">
+
+    <text x="620" y="160" font-size="15" letter-spacing="2.6" fill="#5C6672">SERVERLESS BACKEND</text>
+    <line x1="620" y1="180" x2="1460" y2="180" stroke="#C9CFD6" stroke-width="1"/>
+
+    <!-- voice input -->
+    <rect x="620" y="238" width="200" height="76" rx="2" fill="none" stroke="#14181D" stroke-width="1"/>
+    <text x="720" y="272" font-size="14" letter-spacing="1.6" fill="#14181D" text-anchor="middle">VOICE INPUT</text>
+    <text x="720" y="293" font-size="11" letter-spacing="1" fill="#5C6672" text-anchor="middle">MULTILINGUAL</text>
+
+    <line x1="820" y1="276" x2="900" y2="276" stroke="#1B4DB1" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+    <!-- api gateway -->
+    <rect x="916" y="238" width="200" height="76" rx="2" fill="none" stroke="#14181D" stroke-width="1"/>
+    <text x="1016" y="272" font-size="14" letter-spacing="1.6" fill="#14181D" text-anchor="middle">API GATEWAY</text>
+    <text x="1016" y="293" font-size="11" letter-spacing="1" fill="#5C6672" text-anchor="middle">REST</text>
+
+    <line x1="1116" y1="276" x2="1196" y2="276" stroke="#1B4DB1" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+    <!-- lambda -->
+    <rect x="1212" y="238" width="200" height="76" rx="2" fill="none" stroke="#14181D" stroke-width="1"/>
+    <text x="1312" y="272" font-size="14" letter-spacing="1.6" fill="#14181D" text-anchor="middle">LAMBDA</text>
+    <text x="1312" y="293" font-size="11" letter-spacing="1" fill="#5C6672" text-anchor="middle">NODE.JS</text>
+
+    <!-- lambda down to bedrock -->
+    <line x1="1312" y1="314" x2="1312" y2="406" stroke="#1B4DB1" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <rect x="1212" y="422" width="200" height="76" rx="2" fill="none" stroke="#14181D" stroke-width="1"/>
+    <text x="1312" y="456" font-size="14" letter-spacing="1.6" fill="#14181D" text-anchor="middle">BEDROCK</text>
+    <text x="1312" y="477" font-size="11" letter-spacing="1" fill="#5C6672" text-anchor="middle">LLM INFERENCE</text>
+
+    <!-- lambda across to dynamo -->
+    <line x1="1212" y1="276" x2="1212" y2="276" stroke="none"/>
+    <path d="M1262 314 L1262 460 L1132 460" fill="none" stroke="#1B4DB1" stroke-width="1.4" marker-end="url(#arrow)" opacity="0"/>
+    <line x1="1212" y1="460" x2="1132" y2="460" stroke="#1B4DB1" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <line x1="1212" y1="460" x2="1212" y2="460" stroke="#1B4DB1" stroke-width="1.4"/>
+    <path d="M1312 340 L1180 340 L1180 460" fill="none" stroke="#1B4DB1" stroke-width="1.4" opacity="0"/>
+    <rect x="916" y="422" width="200" height="76" rx="2" fill="none" stroke="#14181D" stroke-width="1"/>
+    <text x="1016" y="456" font-size="14" letter-spacing="1.6" fill="#14181D" text-anchor="middle">DYNAMODB</text>
+    <text x="1016" y="477" font-size="11" letter-spacing="1" fill="#5C6672" text-anchor="middle">NO PII STORED</text>
+
+    <!-- spec block -->
+    <line x1="620" y1="580" x2="1460" y2="580" stroke="#C9CFD6" stroke-width="1"/>
+
+    <text x="620" y="618" font-size="12" letter-spacing="1.5" fill="#5C6672">DEFINED IN</text>
+    <text x="900" y="618" font-size="13" fill="#14181D">AWS CDK — INFRASTRUCTURE AS CODE</text>
+    <line x1="620" y1="638" x2="1460" y2="638" stroke="#C9CFD6" stroke-width="1"/>
+
+    <text x="620" y="676" font-size="12" letter-spacing="1.5" fill="#5C6672">BUILT AT</text>
+    <text x="900" y="676" font-size="13" fill="#14181D">STANDARD BANK UNIHACK 2026</text>
+    <line x1="620" y1="696" x2="1460" y2="696" stroke="#C9CFD6" stroke-width="1"/>
+
+    <text x="620" y="734" font-size="12" letter-spacing="1.5" fill="#5C6672">KEY RESULT</text>
+    <text x="900" y="734" font-size="13" fill="#E8A33D">FULL SIMULATED PATIENT LOAD UNDER $2</text>
+    <line x1="620" y1="754" x2="1460" y2="754" stroke="#C9CFD6" stroke-width="1"/>
+
+  </g>
+</svg>

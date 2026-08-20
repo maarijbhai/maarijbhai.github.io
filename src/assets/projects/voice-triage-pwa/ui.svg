@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="scoreCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E5BE8"/>
+      <stop offset="100%" stop-color="#0B3BAE"/>
+    </linearGradient>
+    <clipPath id="phoneClip">
+      <rect x="590" y="70" width="420" height="760" rx="28"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FBFBF9"/>
+
+  <!-- phone body -->
+  <rect x="578" y="58" width="444" height="784" rx="40" fill="#14181D"/>
+  <rect x="590" y="70" width="420" height="760" rx="28" fill="#F4F6F9"/>
+
+  <g clip-path="url(#phoneClip)">
+
+    <!-- status bar -->
+    <text x="616" y="102" font-size="15" font-weight="600" fill="#14181D">9:41</text>
+    <rect x="944" y="90" width="30" height="14" rx="3" fill="none" stroke="#14181D" stroke-width="1.5"/>
+    <rect x="947" y="93" width="22" height="8" rx="1.5" fill="#14181D"/>
+
+    <!-- continuity score card -->
+    <rect x="614" y="122" width="372" height="184" rx="18" fill="url(#scoreCard)"/>
+    <text x="640" y="154" font-size="11.5" font-weight="600" letter-spacing="1.4" fill="#AFC6F5">CONTINUITY SCORE</text>
+
+    <circle cx="692" cy="222" r="42" fill="none" stroke="#3D6FE0" stroke-width="9"/>
+    <circle cx="692" cy="222" r="42" fill="none" stroke="#FFFFFF" stroke-width="9"
+            stroke-linecap="round" stroke-dasharray="243 264" transform="rotate(-90 692 222)"/>
+    <text x="692" y="222" font-size="25" font-weight="700" fill="#FFFFFF" text-anchor="middle">92%</text>
+    <text x="692" y="242" font-size="10" letter-spacing="0.8" fill="#C5D6F8" text-anchor="middle">ADHERENCE</text>
+
+    <g font-size="17" font-weight="700" fill="#FFFFFF">
+      <text x="790" y="186">14 Days</text>
+      <text x="790" y="234">3 Days</text>
+      <text x="790" y="282">08:00 daily</text>
+    </g>
+    <g font-size="11.5" fill="#B9CDF7">
+      <text x="790" y="203">Current streak</text>
+      <text x="790" y="251">Until next refill</text>
+      <text x="790" y="299">Daily dose time</text>
+    </g>
+    <circle cx="772" cy="181" r="6" fill="#FF7A7A"/>
+    <circle cx="772" cy="229" r="6" fill="#E8A33D"/>
+    <circle cx="772" cy="277" r="6" fill="#7FD6A8"/>
+
+    <!-- encouragement banner -->
+    <rect x="614" y="322" width="372" height="66" rx="14" fill="#E3F4EC"/>
+    <circle cx="646" cy="355" r="12" fill="#C4E8D7"/>
+    <text x="646" y="360" font-size="13" text-anchor="middle" fill="#1F7A52">★</text>
+    <text x="670" y="350" font-size="12.5" fill="#1F5B41">Great job staying consistent this month!</text>
+    <text x="670" y="370" font-size="12.5" fill="#1F5B41">You're in the top 15% of patients.</text>
+
+    <!-- current medication -->
+    <rect x="614" y="404" width="372" height="118" rx="16" fill="#FFFFFF"/>
+    <text x="640" y="434" font-size="11" font-weight="600" letter-spacing="1.2" fill="#7A8697">CURRENT MEDICATION</text>
+    <text x="640" y="464" font-size="15" font-weight="600" fill="#14181D">Tenofovir / Lamivudine / Dolutegravir</text>
+    <rect x="640" y="484" width="320" height="7" rx="3.5" fill="#E4E9F0"/>
+    <rect x="640" y="484" width="268" height="7" rx="3.5" fill="#1E5BE8"/>
+    <text x="960" y="478" font-size="11.5" fill="#7A8697" text-anchor="end">3 days left</text>
+
+    <!-- this week -->
+    <rect x="614" y="538" width="372" height="152" rx="16" fill="#FFFFFF"/>
+    <text x="640" y="568" font-size="11" font-weight="600" letter-spacing="1.2" fill="#7A8697">THIS WEEK</text>
+
+    <g>
+      <rect x="640" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+      <rect x="686" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+      <rect x="732" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+      <rect x="778" y="586" width="36" height="36" rx="9" fill="#F08A7E"/>
+      <rect x="824" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+      <rect x="870" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+      <rect x="916" y="586" width="36" height="36" rx="9" fill="#5BC98F"/>
+    </g>
+    <g font-size="10.5" fill="#7A8697" text-anchor="middle">
+      <text x="658" y="640">MON</text>
+      <text x="704" y="640">TUE</text>
+      <text x="750" y="640">WED</text>
+      <text x="796" y="640">THU</text>
+      <text x="842" y="640">FRI</text>
+      <text x="888" y="640">SAT</text>
+      <text x="934" y="640">SUN</text>
+    </g>
+
+    <g font-size="10.5" fill="#7A8697">
+      <rect x="690" y="658" width="9" height="9" rx="2.5" fill="#5BC98F"/>
+      <text x="705" y="666">Taken</text>
+      <rect x="752" y="658" width="9" height="9" rx="2.5" fill="#E8A33D"/>
+      <text x="767" y="666">Late</text>
+      <rect x="808" y="658" width="9" height="9" rx="2.5" fill="#F08A7E"/>
+      <text x="823" y="666">Missed</text>
+    </g>
+
+    <!-- last 28 days (partially cut, as in original) -->
+    <text x="640" y="722" font-size="11" font-weight="600" letter-spacing="1.2" fill="#7A8697">LAST 28 DAYS</text>
+
+    <!-- bottom nav -->
+    <rect x="590" y="748" width="420" height="82" fill="#FFFFFF"/>
+    <line x1="590" y1="748" x2="1010" y2="748" stroke="#E4E9F0" stroke-width="1"/>
+    <g font-size="10" letter-spacing="0.6" text-anchor="middle" fill="#9AA4B0">
+      <text x="662" y="800">TRIAGE</text>
+      <text x="767" y="800">PRICES</text>
+      <text x="872" y="800" fill="#1E5BE8" font-weight="600">SKIPQUEUE</text>
+      <text x="977" y="800">MY HEALTH</text>
+    </g>
+    <circle cx="662" cy="778" r="7" fill="none" stroke="#9AA4B0" stroke-width="1.8"/>
+    <circle cx="767" cy="778" r="7" fill="none" stroke="#9AA4B0" stroke-width="1.8"/>
+    <rect x="865" y="771" width="14" height="14" rx="3" fill="#1E5BE8"/>
+    <circle cx="977" cy="778" r="7" fill="none" stroke="#9AA4B0" stroke-width="1.8"/>
+
+  </g>
+</svg>

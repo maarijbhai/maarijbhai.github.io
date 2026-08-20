@@ -65,7 +65,7 @@ const videoInHero = videoAsHero && !!videoLoop;
     <div class="project-team">
       <Figure src={teamPhoto} alt={teamAlt ?? ''} caption={teamCaption} />
     </div>
-  ) : (!videoInHero && (
+  ) : (!videoInHero && (videoLoop || youtubeId) && (
     <VideoEmbed youtubeId={youtubeId} videoLoop={videoLoop} videoAlt={videoAlt} />
   ))}
 

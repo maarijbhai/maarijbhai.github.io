@@ -15,10 +15,11 @@ stack:
   - "MPU gyroscope (evaluated, not used)"
 keyResult: "Watch the video :)"
 hero: ../../assets/projects/micromouse/uctmm.png
-heroAlt: "UCT micromouse"
+heroAlt: "UCT Micromouse team logo"
 heroFit: contain
 videoLoop: "/videos/micromouse-loop.webm"
 videoAlt: "Micromouse solving the maze, 14-second silent loop"
+videoAsHero: true
 ---
 
 ## PROBLEM
@@ -43,7 +44,7 @@ A Stateflow chart running the full navigation loop, with maze reasoning in a MAT
 
 **Straight-line correction.** Proportional control on ToF error. Two walls: centre on the difference. One wall: hold a fixed offset. No walls: open loop. A deadband ignores sensor noise, and motor commands are clamped so a correction can't stall a wheel.
 
-**Turning.** Gyro-based turn termination was implemented and removed; integrated heading drifted too much. TODO: describe the final turn method.
+**Turning.** Gyro-based turn termination was implemented and removed; integrated heading drifted too much. Used encoder based turning.
 
 ## WHAT I'D DO DIFFERENTLY
 
